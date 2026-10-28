@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#"
+     xml:base="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify">
+        <rdfs:label xml:lang="es">Ontología del SGC de Spotify</rdfs:label>
+        <rdfs:comment xml:lang="es">Ontología del sistema de gestión del conocimiento del área de desarrollo de software de Spotify: áreas, equipos, servicios, incidentes, usuarios y los tipos de documento que clasifica el prototipo.</rdfs:comment>
+        <owl:versionInfo>1.0</owl:versionInfo>
+    </owl:Ontology>
+
+    <!-- ///////////// Object Properties ///////////// -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#esMiembroDe">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Colaborador"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Squad"/>
+        <rdfs:label xml:lang="es">es miembro de</rdfs:label>
+        <rdfs:comment xml:lang="es">El colaborador pertenece a un squad.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#formaParteDe">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Squad"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Tribu"/>
+        <rdfs:label xml:lang="es">forma parte de</rdfs:label>
+        <rdfs:comment xml:lang="es">El squad pertenece a una tribu.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#esResponsableDe">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#tieneResponsable"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Squad"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+        <rdfs:label xml:lang="es">es responsable de</rdfs:label>
+        <rdfs:comment xml:lang="es">El squad es dueño de un servicio y lo mantiene.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#tieneResponsable">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Squad"/>
+        <rdfs:label xml:lang="es">tiene responsable</rdfs:label>
+        <rdfs:comment xml:lang="es">Inversa de «es responsable de».</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#desarrolla">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Squad"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Funcionalidad"/>
+        <rdfs:label xml:lang="es">desarrolla</rdfs:label>
+        <rdfs:comment xml:lang="es">El squad construye una funcionalidad del producto.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#utilizaHerramienta">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Squad"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Herramienta"/>
+        <rdfs:label xml:lang="es">utiliza herramienta</rdfs:label>
+        <rdfs:comment xml:lang="es">El squad trabaja con una herramienta interna.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#seImplementaEn">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Funcionalidad"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+        <rdfs:label xml:lang="es">se implementa en</rdfs:label>
+        <rdfs:comment xml:lang="es">La funcionalidad corre sobre un servicio de software.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#dependeDe">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+        <rdfs:label xml:lang="es">depende de</rdfs:label>
+        <rdfs:comment xml:lang="es">Un servicio necesita de otro para funcionar.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#afecta">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Incidente"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+        <rdfs:label xml:lang="es">afecta</rdfs:label>
+        <rdfs:comment xml:lang="es">El incidente interrumpe o degrada un servicio.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#usaFuncionalidad">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Usuario"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Funcionalidad"/>
+        <rdfs:label xml:lang="es">usa funcionalidad</rdfs:label>
+        <rdfs:comment xml:lang="es">El usuario utiliza una funcionalidad de la app.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#genera">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Usuario"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DatosUsuarios"/>
+        <rdfs:label xml:lang="es">genera</rdfs:label>
+        <rdfs:comment xml:lang="es">El uso de la app produce datos del usuario.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#esGeneradoPor">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#AreaOrganizacional"/>
+        <rdfs:label xml:lang="es">es generado por</rdfs:label>
+        <rdfs:comment xml:lang="es">Área que escribe y actualiza el documento.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#seAlmacenaEn">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Herramienta"/>
+        <rdfs:label xml:lang="es">se almacena en</rdfs:label>
+        <rdfs:comment xml:lang="es">Herramienta donde se guarda el documento.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#documenta">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+        <rdfs:label xml:lang="es">documenta</rdfs:label>
+        <rdfs:comment xml:lang="es">La documentación explica cómo funciona o se opera un servicio.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#analiza">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#esAnalizadoEn"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Incidente"/>
+        <rdfs:label xml:lang="es">analiza</rdfs:label>
+        <rdfs:comment xml:lang="es">El postmortem explica la causa y las acciones de un incidente.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#esAnalizadoEn">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Incidente"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <rdfs:label xml:lang="es">es analizado en</rdfs:label>
+        <rdfs:comment xml:lang="es">Inversa de «analiza».</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#evalua">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Funcionalidad"/>
+        <rdfs:label xml:lang="es">evalúa</rdfs:label>
+        <rdfs:comment xml:lang="es">El experimento mide el efecto de una funcionalidad.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#regula">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Colaborador"/>
+        <rdfs:label xml:lang="es">regula</rdfs:label>
+        <rdfs:comment xml:lang="es">La política define lo que deben hacer los colaboradores.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#protege">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DatosUsuarios"/>
+        <rdfs:label xml:lang="es">protege</rdfs:label>
+        <rdfs:comment xml:lang="es">La política establece cómo cuidar los datos de los usuarios.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#describe">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Usuario"/>
+        <rdfs:label xml:lang="es">describe</rdfs:label>
+        <rdfs:comment xml:lang="es">La investigación explica cómo se comportan y qué necesitan los usuarios.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <!-- ///////////// Data Properties ///////////// -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#idDocumento">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="es">id de documento</rdfs:label>
+        <rdfs:comment xml:lang="es">Identificador del documento en el conjunto de prueba (por ejemplo RI08).</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#titulo">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="es">título</rdfs:label>
+        <rdfs:comment xml:lang="es">Título del documento.</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#confianzaClasificacion">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label xml:lang="es">confianza de clasificación</rdfs:label>
+        <rdfs:comment xml:lang="es">Probabilidad que el clasificador asignó a la categoría de un documento nuevo.</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#nombre">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#AreaOrganizacional"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Equipo"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Funcionalidad"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Herramienta"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Colaborador"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="es">nombre</rdfs:label>
+        <rdfs:comment xml:lang="es">Nombre con el que se identifica el elemento.</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#rol">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Colaborador"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="es">rol</rdfs:label>
+        <rdfs:comment xml:lang="es">Puesto del colaborador (ingeniero, product manager, etc.).</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#descripcion">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Incidente"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="es">descripción</rdfs:label>
+        <rdfs:comment xml:lang="es">Resumen breve del incidente.</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#prioridad">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Incidente"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P1</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P2</rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P3</rdf:first>
+                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <rdfs:label xml:lang="es">prioridad</rdfs:label>
+        <rdfs:comment xml:lang="es">Prioridad del incidente según su impacto.</rdfs:comment>
+    </owl:DatatypeProperty>
+
+    <!-- ///////////// Classes ///////////// -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#AreaOrganizacional">
+        <rdfs:label xml:lang="es">Área organizacional</rdfs:label>
+        <rdfs:comment xml:lang="es">Área de la empresa que genera, usa o actualiza conocimiento.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Colaborador">
+        <rdfs:label xml:lang="es">Colaborador</rdfs:label>
+        <rdfs:comment xml:lang="es">Persona que trabaja en el área de desarrollo de software (ingeniero, product manager, investigador).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Equipo">
+        <rdfs:label xml:lang="es">Equipo</rdfs:label>
+        <rdfs:comment xml:lang="es">Grupo de colaboradores organizado para desarrollar el producto.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Squad">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Equipo"/>
+        <rdfs:label xml:lang="es">Squad</rdfs:label>
+        <rdfs:comment xml:lang="es">Equipo pequeño y autónomo dueño de una parte del producto.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Tribu">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Equipo"/>
+        <rdfs:label xml:lang="es">Tribu</rdfs:label>
+        <rdfs:comment xml:lang="es">Grupo de squads que trabajan en un área de negocio relacionada.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware">
+        <rdfs:label xml:lang="es">Servicio de software</rdfs:label>
+        <rdfs:comment xml:lang="es">Microservicio de la plataforma (pagos, cuentas, autenticación, búsqueda).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Funcionalidad">
+        <rdfs:label xml:lang="es">Funcionalidad</rdfs:label>
+        <rdfs:comment xml:lang="es">Característica del producto que ve el usuario (playlists, letras, recordatorios).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Incidente">
+        <rdfs:label xml:lang="es">Incidente</rdfs:label>
+        <rdfs:comment xml:lang="es">Falla que afecta a un servicio de software.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Usuario">
+        <rdfs:label xml:lang="es">Usuario</rdfs:label>
+        <rdfs:comment xml:lang="es">Persona que usa Spotify.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DatosUsuarios">
+        <rdfs:label xml:lang="es">Datos de usuarios</rdfs:label>
+        <rdfs:comment xml:lang="es">Información de escucha y de cuenta que la empresa debe proteger.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Herramienta">
+        <rdfs:label xml:lang="es">Herramienta</rdfs:label>
+        <rdfs:comment xml:lang="es">Herramienta interna donde se registran servicios y documentación (por ejemplo Backstage).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento">
+        <rdfs:label xml:lang="es">Documento</rdfs:label>
+        <rdfs:comment xml:lang="es">Registro escrito del conocimiento del área; es lo que clasifica y busca el prototipo.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        <rdfs:label xml:lang="es">Documentación técnica</rdfs:label>
+        <rdfs:comment xml:lang="es">Guías de despliegue, APIs, arquitectura y manuales de monitoreo.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        <rdfs:label xml:lang="es">Reporte de incidente</rdfs:label>
+        <rdfs:comment xml:lang="es">Postmortem con qué falló, causa raíz, impacto y acciones correctivas.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        <rdfs:label xml:lang="es">Resultado de experimento A/B</rdfs:label>
+        <rdfs:comment xml:lang="es">Hipótesis, muestra, métricas y decisión de una prueba A/B.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        <rdfs:label xml:lang="es">Política interna</rdfs:label>
+        <rdfs:comment xml:lang="es">Reglas sobre privacidad, seguridad, uso de IA, accesos y licencias.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        <rdfs:label xml:lang="es">Investigación de usuarios</rdfs:label>
+        <rdfs:comment xml:lang="es">Entrevistas, encuestas y pruebas de usabilidad con usuarios.</rdfs:comment>
+    </owl:Class>
+
+    <!-- ///////////// Individuals ///////////// -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#AreaOrganizacional"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ingeniería de plataforma</nombre>
+        <rdfs:label xml:lang="es">Ingeniería de plataforma</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#AreaOrganizacional"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Producto y datos</nombre>
+        <rdfs:label xml:lang="es">Producto y datos</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#AreaOrganizacional"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Legal y seguridad</nombre>
+        <rdfs:label xml:lang="es">Legal y seguridad</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#AreaOrganizacional"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Investigación UX</nombre>
+        <rdfs:label xml:lang="es">Investigación UX</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_PlataformaConocimiento">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#AreaOrganizacional"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Plataforma de conocimiento</nombre>
+        <rdfs:label xml:lang="es">Plataforma de conocimiento</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Herramienta"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Backstage</nombre>
+        <rdfs:label xml:lang="es">Backstage</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#tribu_Monetizacion">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Tribu"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tribu de monetización</nombre>
+        <rdfs:label xml:lang="es">Tribu de monetización</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#squad_Pagos">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Squad"/>
+        <formaParteDe rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#tribu_Monetizacion"/>
+        <esResponsableDe rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Pagos"/>
+        <desarrolla rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#func_RenovacionPremium"/>
+        <utilizaHerramienta rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Squad de Pagos</nombre>
+        <rdfs:label xml:lang="es">Squad de Pagos</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#colaborador_IngGuardia">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Colaborador"/>
+        <esMiembroDe rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#squad_Pagos"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ingeniera de guardia del squad de Pagos</nombre>
+        <rol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ingeniera de software</rol>
+        <rdfs:label xml:lang="es">Ingeniera de guardia del squad de Pagos</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Pagos">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+        <dependeDe rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Cuentas"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Servicio de pagos</nombre>
+        <rdfs:label xml:lang="es">Servicio de pagos</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Cuentas">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+        <dependeDe rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Autenticacion"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Servicio de cuentas</nombre>
+        <rdfs:label xml:lang="es">Servicio de cuentas</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Autenticacion">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Servicio de autenticación</nombre>
+        <rdfs:label xml:lang="es">Servicio de autenticación</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#func_RenovacionPremium">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Funcionalidad"/>
+        <seImplementaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Pagos"/>
+        <nombre rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Renovación de Premium</nombre>
+        <rdfs:label xml:lang="es">Renovación de Premium</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#incidente_CertificadoVencido">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Incidente"/>
+        <afecta rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Pagos"/>
+        <descripcion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Caída del servicio de pagos por un certificado vencido</descripcion>
+        <prioridad rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P1</prioridad>
+        <rdfs:label xml:lang="es">Caída del servicio de pagos por un certificado vencido</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#usuario_Suscriptor">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Usuario"/>
+        <usaFuncionalidad rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#func_RenovacionPremium"/>
+        <genera rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#datos_Escucha"/>
+        <rdfs:label xml:lang="es">usuario_Suscriptor</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#datos_Escucha">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DatosUsuarios"/>
+        <rdfs:label xml:lang="es">datos_Escucha</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <documenta rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Pagos"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DT01</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Guía de despliegue del servicio de pagos</titulo>
+        <rdfs:label xml:lang="es">Guía de despliegue del servicio de pagos</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <documenta rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Autenticacion"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DT02</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Arquitectura del servicio de autenticación</titulo>
+        <rdfs:label xml:lang="es">Arquitectura del servicio de autenticación</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DT03</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Configuración del entorno local de desarrollo</titulo>
+        <rdfs:label xml:lang="es">Configuración del entorno local de desarrollo</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT04">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DT04</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Especificación de la API de playlists</titulo>
+        <rdfs:label xml:lang="es">Especificación de la API de playlists</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT05">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DT05</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manual de monitoreo y alertas de la plataforma</titulo>
+        <rdfs:label xml:lang="es">Manual de monitoreo y alertas de la plataforma</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT06">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DT06</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Modelo de datos del sistema de recomendaciones</titulo>
+        <rdfs:label xml:lang="es">Modelo de datos del sistema de recomendaciones</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT07">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <documenta rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Cuentas"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DT07</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Procedimiento de migración de base de datos</titulo>
+        <rdfs:label xml:lang="es">Procedimiento de migración de base de datos</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT08">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DT08</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Estándares de código y revisión entre pares</titulo>
+        <rdfs:label xml:lang="es">Estándares de código y revisión entre pares</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <evalua rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#func_RenovacionPremium"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EX01</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Resultado de prueba A/B: recordatorio de renovación</titulo>
+        <rdfs:label xml:lang="es">Resultado de prueba A/B: recordatorio de renovación</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EX02</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Experimento: nuevo diseño de la pantalla de inicio</titulo>
+        <rdfs:label xml:lang="es">Experimento: nuevo diseño de la pantalla de inicio</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EX03</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prueba A/B: duración del periodo de prueba gratuita</titulo>
+        <rdfs:label xml:lang="es">Prueba A/B: duración del periodo de prueba gratuita</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX04">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EX04</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Experimento con recomendaciones de podcasts</titulo>
+        <rdfs:label xml:lang="es">Experimento con recomendaciones de podcasts</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX05">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EX05</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Resultado de prueba A/B: orden de resultados de búsqueda</titulo>
+        <rdfs:label xml:lang="es">Resultado de prueba A/B: orden de resultados de búsqueda</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX06">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EX06</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Experimento: precio del plan familiar</titulo>
+        <rdfs:label xml:lang="es">Experimento: precio del plan familiar</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX07">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EX07</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prueba A/B: notificación de lanzamientos de artistas</titulo>
+        <rdfs:label xml:lang="es">Prueba A/B: notificación de lanzamientos de artistas</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX08">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EX08</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Experimento con la función de letras en pantalla</titulo>
+        <rdfs:label xml:lang="es">Experimento con la función de letras en pantalla</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <describe rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#usuario_Suscriptor"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IU01</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Estudio: por qué los usuarios cancelan Premium</titulo>
+        <rdfs:label xml:lang="es">Estudio: por qué los usuarios cancelan Premium</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IU02</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Investigación sobre hábitos de escucha de podcasts</titulo>
+        <rdfs:label xml:lang="es">Investigación sobre hábitos de escucha de podcasts</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IU03</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pruebas de usabilidad de la biblioteca</titulo>
+        <rdfs:label xml:lang="es">Pruebas de usabilidad de la biblioteca</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU04">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IU04</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Entrevistas con artistas emergentes</titulo>
+        <rdfs:label xml:lang="es">Entrevistas con artistas emergentes</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU05">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IU05</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Estudio de accesibilidad con usuarios con discapacidad visual</titulo>
+        <rdfs:label xml:lang="es">Estudio de accesibilidad con usuarios con discapacidad visual</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU06">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IU06</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Investigación sobre el uso en América Latina</titulo>
+        <rdfs:label xml:lang="es">Investigación sobre el uso en América Latina</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU07">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IU07</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Encuesta de satisfacción con las recomendaciones</titulo>
+        <rdfs:label xml:lang="es">Encuesta de satisfacción con las recomendaciones</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU08">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IU08</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Estudio etnográfico: la música en el trabajo</titulo>
+        <rdfs:label xml:lang="es">Estudio etnográfico: la música en el trabajo</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <protege rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#datos_Escucha"/>
+        <regula rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#colaborador_IngGuardia"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PO01</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Política de privacidad y protección de datos de usuarios</titulo>
+        <rdfs:label xml:lang="es">Política de privacidad y protección de datos de usuarios</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <regula rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#colaborador_IngGuardia"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PO02</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Política de seguridad de la información</titulo>
+        <rdfs:label xml:lang="es">Política de seguridad de la información</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PO03</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lineamientos de uso responsable de inteligencia artificial</titulo>
+        <rdfs:label xml:lang="es">Lineamientos de uso responsable de inteligencia artificial</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO04">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PO04</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Política de retención y eliminación de registros</titulo>
+        <rdfs:label xml:lang="es">Política de retención y eliminación de registros</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO05">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PO05</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Código de conducta para colaboradores</titulo>
+        <rdfs:label xml:lang="es">Código de conducta para colaboradores</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO06">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PO06</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Política de licencias y derechos de autor del catálogo</titulo>
+        <rdfs:label xml:lang="es">Política de licencias y derechos de autor del catálogo</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO07">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PO07</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Política de acceso a sistemas internos</titulo>
+        <rdfs:label xml:lang="es">Política de acceso a sistemas internos</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO08">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PO08</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Política de trabajo remoto y uso de equipos</titulo>
+        <rdfs:label xml:lang="es">Política de trabajo remoto y uso de equipos</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <analiza rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#incidente_CertificadoVencido"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RI01</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Postmortem: caída del servicio de pagos</titulo>
+        <rdfs:label xml:lang="es">Postmortem: caída del servicio de pagos</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RI02</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Postmortem: errores al iniciar sesión en la app móvil</titulo>
+        <rdfs:label xml:lang="es">Postmortem: errores al iniciar sesión en la app móvil</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RI03</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reporte de incidente: latencia alta en la reproducción</titulo>
+        <rdfs:label xml:lang="es">Reporte de incidente: latencia alta en la reproducción</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI04">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RI04</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Postmortem: playlists que desaparecieron</titulo>
+        <rdfs:label xml:lang="es">Postmortem: playlists que desaparecieron</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI05">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RI05</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reporte de incidente: falla en notificaciones push</titulo>
+        <rdfs:label xml:lang="es">Reporte de incidente: falla en notificaciones push</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI06">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RI06</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Postmortem: error en el conteo de reproducciones</titulo>
+        <rdfs:label xml:lang="es">Postmortem: error en el conteo de reproducciones</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI07">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RI07</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reporte de incidente: caída del buscador</titulo>
+        <rdfs:label xml:lang="es">Reporte de incidente: caída del buscador</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI08">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RI08</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Postmortem: cobro duplicado a suscriptores</titulo>
+        <rdfs:label xml:lang="es">Postmortem: cobro duplicado a suscriptores</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NUEVO01</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Guía de instalación del servicio de búsqueda</titulo>
+        <confianzaClasificacion rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.91</confianzaClasificacion>
+        <rdfs:label xml:lang="es">Guía de instalación del servicio de búsqueda</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NUEVO02</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Postmortem: interrupción de descargas sin conexión</titulo>
+        <confianzaClasificacion rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.95</confianzaClasificacion>
+        <rdfs:label xml:lang="es">Postmortem: interrupción de descargas sin conexión</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NUEVO03</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Resultado de prueba A/B: botón de mezcla aleatoria</titulo>
+        <confianzaClasificacion rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.97</confianzaClasificacion>
+        <rdfs:label xml:lang="es">Resultado de prueba A/B: botón de mezcla aleatoria</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO04">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NUEVO04</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Política de uso de datos para entrenar modelos</titulo>
+        <confianzaClasificacion rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</confianzaClasificacion>
+        <rdfs:label xml:lang="es">Política de uso de datos para entrenar modelos</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO05">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NUEVO05</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hallazgos de entrevistas con usuarios de audiolibros</titulo>
+        <confianzaClasificacion rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.87</confianzaClasificacion>
+        <rdfs:label xml:lang="es">Hallazgos de entrevistas con usuarios de audiolibros</rdfs:label>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO06">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+        <esGeneradoPor rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+        <seAlmacenaEn rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+        <documenta rdf:resource="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Cuentas"/>
+        <idDocumento rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NUEVO06</idDocumento>
+        <titulo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manual de respuesta ante alertas del servicio de cuentas</titulo>
+        <confianzaClasificacion rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.84</confianzaClasificacion>
+        <rdfs:label xml:lang="es">Manual de respuesta ante alertas del servicio de cuentas</rdfs:label>
+    </owl:NamedIndividual>
+
+    <!-- ///////////// General axioms ///////////// -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#AreaOrganizacional"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Colaborador"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Equipo"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ServicioSoftware"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Funcionalidad"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Incidente"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DatosUsuarios"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Herramienta"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Documento"/>
+        </owl:members>
+    </rdf:Description>
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Squad"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#Tribu"/>
+        </owl:members>
+    </rdf:Description>
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#DocumentacionTecnica"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ReporteIncidente"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#ResultadoExperimentoAB"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#PoliticaInterna"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#InvestigacionUsuarios"/>
+        </owl:members>
+    </rdf:Description>
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_IngenieriaPlataforma"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_ProductoDatos"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_LegalSeguridad"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_InvestigacionUX"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#area_PlataformaConocimiento"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#herramienta_Backstage"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#tribu_Monetizacion"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#squad_Pagos"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#colaborador_IngGuardia"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Pagos"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Cuentas"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#servicio_Autenticacion"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#func_RenovacionPremium"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#incidente_CertificadoVencido"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#usuario_Suscriptor"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#datos_Escucha"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT01"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT02"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT03"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT04"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT05"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT06"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT07"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_DT08"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX01"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX02"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX03"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX04"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX05"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX06"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX07"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_EX08"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU01"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU02"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU03"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU04"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU05"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU06"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU07"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_IU08"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO01"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO02"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO03"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO04"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO05"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO06"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO07"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_PO08"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI01"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI02"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI03"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI04"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI05"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI06"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI07"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_RI08"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO01"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO02"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO03"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO04"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO05"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sgc-spotify/ontologies/sgc-spotify#doc_NUEVO06"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+</rdf:RDF>
