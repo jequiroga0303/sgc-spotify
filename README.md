@@ -15,7 +15,7 @@ El índice semántico que comparten la búsqueda, el recomendador y el chatbot e
 
 > Los documentos son **simulados**. Se redactaron para el proyecto con base en información pública sobre cómo trabaja Spotify; no son documentos internos reales.
 
-**Aplicación desplegada:** `https://TU-APP.streamlit.app` *(reemplazar por el enlace de Streamlit Cloud)*
+**Aplicación desplegada:** https://sgc-spotify.streamlit.app
 
 ![Arquitectura](docs/arquitectura.png)
 
