@@ -1,0 +1,1063 @@
+{
+ "clasificacion": {
+  "modelo_final": "Regresión Logística · caracteres",
+  "comparacion": [
+   {
+    "modelo": "Naive Bayes · palabras (avance)",
+    "exactitud_cv5": 0.9,
+    "exactitud_cv5x10": 0.875
+   },
+   {
+    "modelo": "Regresión Logística · palabras (avance)",
+    "exactitud_cv5": 0.875,
+    "exactitud_cv5x10": 0.8524999999999998
+   },
+   {
+    "modelo": "Naive Bayes · caracteres",
+    "exactitud_cv5": 0.925,
+    "exactitud_cv5x10": 0.9075000000000001
+   },
+   {
+    "modelo": "SVM lineal · caracteres",
+    "exactitud_cv5": 0.925,
+    "exactitud_cv5x10": 0.93
+   },
+   {
+    "modelo": "Regresión Logística · caracteres",
+    "exactitud_cv5": 0.925,
+    "exactitud_cv5x10": 0.9200000000000002
+   }
+  ],
+  "avance": {
+   "exactitud": 0.9,
+   "macro": {
+    "precision": 0.9016666666666667,
+    "recall": 0.9,
+    "f1": 0.8956349206349206
+   }
+  },
+  "final": {
+   "exactitud": 0.925,
+   "macro": {
+    "precision": 0.9242063492063493,
+    "recall": 0.925,
+    "f1": 0.923235294117647
+   },
+   "por_categoria": [
+    {
+     "categoria": "Documentación técnica",
+     "precision": 0.8571428571428571,
+     "recall": 0.75,
+     "f1": 0.8,
+     "documentos": 8.0
+    },
+    {
+     "categoria": "Reporte de incidente",
+     "precision": 0.8888888888888888,
+     "recall": 1.0,
+     "f1": 0.9411764705882353,
+     "documentos": 8.0
+    },
+    {
+     "categoria": "Resultado de experimento A/B",
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "documentos": 8.0
+    },
+    {
+     "categoria": "Política interna",
+     "precision": 0.875,
+     "recall": 0.875,
+     "f1": 0.875,
+     "documentos": 8.0
+    },
+    {
+     "categoria": "Investigación de usuarios",
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "documentos": 8.0
+    }
+   ],
+   "matriz": [
+    [
+     6,
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     8,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     8,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     0,
+     7,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     8
+    ]
+   ]
+  },
+  "errores": [
+   {
+    "id": "DT01",
+    "titulo": "Guía de despliegue del servicio de pagos",
+    "real": "Documentación técnica",
+    "predicha": "Reporte de incidente"
+   },
+   {
+    "id": "DT06",
+    "titulo": "Modelo de datos del sistema de recomendaciones",
+    "real": "Documentación técnica",
+    "predicha": "Política interna"
+   },
+   {
+    "id": "PO03",
+    "titulo": "Lineamientos de uso responsable de inteligencia artificial",
+    "real": "Política interna",
+    "predicha": "Documentación técnica"
+   }
+  ],
+  "prueba_25": {
+   "aciertos": 10,
+   "total": 10
+  },
+  "nuevos": [
+   {
+    "id": "NUEVO01",
+    "titulo": "Guía de instalación del servicio de búsqueda",
+    "categoria": "Documentación técnica",
+    "confianza": 0.8470147991421444
+   },
+   {
+    "id": "NUEVO02",
+    "titulo": "Postmortem: interrupción de descargas sin conexión",
+    "categoria": "Reporte de incidente",
+    "confianza": 0.8745492134962302
+   },
+   {
+    "id": "NUEVO03",
+    "titulo": "Resultado de prueba A/B: botón de mezcla aleatoria",
+    "categoria": "Resultado de experimento A/B",
+    "confianza": 0.9559049394560899
+   },
+   {
+    "id": "NUEVO04",
+    "titulo": "Política de uso de datos para entrenar modelos",
+    "categoria": "Política interna",
+    "confianza": 0.8312505927957446
+   },
+   {
+    "id": "NUEVO05",
+    "titulo": "Hallazgos de entrevistas con usuarios de audiolibros",
+    "categoria": "Investigación de usuarios",
+    "confianza": 0.8504521255312455
+   },
+   {
+    "id": "NUEVO06",
+    "titulo": "Manual de respuesta ante alertas del servicio de cuentas",
+    "categoria": "Documentación técnica",
+    "confianza": 0.8865189171230505
+   }
+  ]
+ },
+ "recomendaciones": {
+  "casos": [
+   {
+    "documento": "RI01",
+    "descripcion": "Caída de pagos: otros incidentes de pagos o de certificados vencidos, y la guía del servicio",
+    "esperados": [
+     "DT01",
+     "RI05",
+     "RI08"
+    ],
+    "recomendados": [
+     "RI08",
+     "NUEVO02",
+     "DT01"
+    ],
+    "similitudes": [
+     0.152,
+     0.151,
+     0.103
+    ],
+    "conceptos": [
+     [
+      "Premium y suscripciones",
+      "Servicio de pagos"
+     ],
+     [
+      "Monitoreo y alertas"
+     ],
+     [
+      "Monitoreo y alertas",
+      "Servicio de pagos"
+     ]
+    ],
+    "precision@k": 0.6666666666666666,
+    "recall@k": 0.6666666666666666,
+    "al_menos_uno": 1.0
+   },
+   {
+    "documento": "RI02",
+    "descripcion": "Error de login: arquitectura de autenticación, manual de alertas de cuentas, otro error tras despliegue",
+    "esperados": [
+     "DT02",
+     "NUEVO02",
+     "NUEVO06"
+    ],
+    "recomendados": [
+     "NUEVO02",
+     "DT02",
+     "DT01"
+    ],
+    "similitudes": [
+     0.132,
+     0.11,
+     0.094
+    ],
+    "conceptos": [
+     [
+      "Error introducido en un despliegue",
+      "Reversión de cambios"
+     ],
+     [
+      "Servicio de autenticación"
+     ],
+     [
+      "Pruebas automatizadas",
+      "Reversión de cambios"
+     ]
+    ],
+    "precision@k": 0.6666666666666666,
+    "recall@k": 0.6666666666666666,
+    "al_menos_uno": 1.0
+   },
+   {
+    "documento": "EX04",
+    "descripcion": "Experimento de podcasts: investigación de hábitos de podcasts y satisfacción con recomendaciones",
+    "esperados": [
+     "IU02",
+     "IU07"
+    ],
+    "recomendados": [
+     "IU02",
+     "EX02",
+     "NUEVO03"
+    ],
+    "similitudes": [
+     0.172,
+     0.148,
+     0.084
+    ],
+    "conceptos": [
+     [
+      "Podcasts",
+      "Sistema de recomendaciones"
+     ],
+     [
+      "Playlists"
+     ],
+     []
+    ],
+    "precision@k": 0.3333333333333333,
+    "recall@k": 0.5,
+    "al_menos_uno": 1.0
+   },
+   {
+    "documento": "IU07",
+    "descripcion": "Satisfacción con recomendaciones: modelo de datos de recomendaciones y estudios relacionados",
+    "esperados": [
+     "DT06",
+     "EX04",
+     "IU04"
+    ],
+    "recomendados": [
+     "IU04",
+     "IU02",
+     "IU01"
+    ],
+    "similitudes": [
+     0.072,
+     0.066,
+     0.06
+    ],
+    "conceptos": [
+     [
+      "Artistas",
+      "Sistema de recomendaciones"
+     ],
+     [
+      "Sistema de recomendaciones"
+     ],
+     []
+    ],
+    "precision@k": 0.3333333333333333,
+    "recall@k": 0.3333333333333333,
+    "al_menos_uno": 1.0
+   },
+   {
+    "documento": "PO01",
+    "descripcion": "Privacidad: política de datos para modelos, retención de registros, uso de IA",
+    "esperados": [
+     "NUEVO04",
+     "PO03",
+     "PO04"
+    ],
+    "recomendados": [
+     "NUEVO04",
+     "PO02",
+     "PO06"
+    ],
+    "similitudes": [
+     0.168,
+     0.105,
+     0.103
+    ],
+    "conceptos": [
+     [
+      "Datos personales",
+      "Protección de datos (reglamento europeo)"
+     ],
+     [],
+     []
+    ],
+    "precision@k": 0.3333333333333333,
+    "recall@k": 0.3333333333333333,
+    "al_menos_uno": 1.0
+   },
+   {
+    "documento": "RI07",
+    "descripcion": "Caída del buscador: guía del servicio de búsqueda y prueba del orden de resultados",
+    "esperados": [
+     "EX05",
+     "NUEVO01"
+    ],
+    "recomendados": [
+     "NUEVO01",
+     "RI03",
+     "RI02"
+    ],
+    "similitudes": [
+     0.118,
+     0.089,
+     0.08
+    ],
+    "conceptos": [
+     [
+      "Servicio de búsqueda"
+     ],
+     [],
+     [
+      "Error introducido en un despliegue",
+      "Reversión de cambios"
+     ]
+    ],
+    "precision@k": 0.3333333333333333,
+    "recall@k": 0.5,
+    "al_menos_uno": 1.0
+   },
+   {
+    "documento": "IU01",
+    "descripcion": "Cancelaciones de Premium: experimentos de renovación, prueba gratuita y precio",
+    "esperados": [
+     "EX01",
+     "EX03",
+     "EX06"
+    ],
+    "recomendados": [
+     "EX06",
+     "NUEVO05",
+     "IU08"
+    ],
+    "similitudes": [
+     0.1,
+     0.092,
+     0.067
+    ],
+    "conceptos": [
+     [
+      "Premium y suscripciones"
+     ],
+     [],
+     []
+    ],
+    "precision@k": 0.3333333333333333,
+    "recall@k": 0.3333333333333333,
+    "al_menos_uno": 1.0
+   },
+   {
+    "documento": "NUEVO06",
+    "descripcion": "Alertas de cuentas: manual de monitoreo, arquitectura de autenticación, incidente de login",
+    "esperados": [
+     "DT02",
+     "DT05",
+     "RI02"
+    ],
+    "recomendados": [
+     "DT05",
+     "DT02",
+     "DT07"
+    ],
+    "similitudes": [
+     0.285,
+     0.15,
+     0.067
+    ],
+    "conceptos": [
+     [
+      "Ingeniero de guardia",
+      "Monitoreo y alertas"
+     ],
+     [
+      "Servicio de autenticación",
+      "Servicio de cuentas"
+     ],
+     [
+      "Servicio de cuentas"
+     ]
+    ],
+    "precision@k": 0.6666666666666666,
+    "recall@k": 0.6666666666666666,
+    "al_menos_uno": 1.0
+   },
+   {
+    "documento": "DT01",
+    "descripcion": "Despliegue de pagos: incidentes del servicio de pagos y otro procedimiento con reversión",
+    "esperados": [
+     "DT07",
+     "RI01",
+     "RI08"
+    ],
+    "recomendados": [
+     "DT07",
+     "NUEVO01",
+     "RI01"
+    ],
+    "similitudes": [
+     0.129,
+     0.116,
+     0.103
+    ],
+    "conceptos": [
+     [
+      "Reversión de cambios"
+     ],
+     [
+      "Contenedores",
+      "Kubernetes"
+     ],
+     [
+      "Monitoreo y alertas",
+      "Servicio de pagos"
+     ]
+    ],
+    "precision@k": 0.6666666666666666,
+    "recall@k": 0.6666666666666666,
+    "al_menos_uno": 1.0
+   },
+   {
+    "documento": "IU02",
+    "descripcion": "Hábitos de podcasts: experimento de podcasts y entrevistas de audiolibros",
+    "esperados": [
+     "EX04",
+     "NUEVO05"
+    ],
+    "recomendados": [
+     "EX04",
+     "IU07",
+     "IU06"
+    ],
+    "similitudes": [
+     0.172,
+     0.066,
+     0.063
+    ],
+    "conceptos": [
+     [
+      "Podcasts",
+      "Sistema de recomendaciones"
+     ],
+     [
+      "Sistema de recomendaciones"
+     ],
+     []
+    ],
+    "precision@k": 0.3333333333333333,
+    "recall@k": 0.5,
+    "al_menos_uno": 1.0
+   }
+  ],
+  "historial": [
+   {
+    "historial": [
+     "caída del servicio de pagos",
+     "certificado vencido"
+    ],
+    "esperados": [
+     "DT01",
+     "RI01",
+     "RI05",
+     "RI08"
+    ],
+    "recomendados": [
+     "RI01",
+     "DT01",
+     "RI08"
+    ],
+    "motivos": [
+     "porque buscaste: \"certificado vencido\"",
+     "porque buscaste: \"caída del servicio de pagos\"",
+     "porque buscaste: \"caída del servicio de pagos\""
+    ],
+    "precision@k": 1.0,
+    "al_menos_uno": 1.0
+   },
+   {
+    "historial": [
+     "podcasts",
+     "recomendaciones semanales"
+    ],
+    "esperados": [
+     "DT06",
+     "EX04",
+     "IU02",
+     "IU07"
+    ],
+    "recomendados": [
+     "IU07",
+     "EX04",
+     "IU02"
+    ],
+    "motivos": [
+     "porque buscaste: \"recomendaciones semanales\"",
+     "porque buscaste: \"podcasts\"",
+     "porque buscaste: \"podcasts\""
+    ],
+    "precision@k": 1.0,
+    "al_menos_uno": 1.0
+   },
+   {
+    "historial": [
+     "datos personales",
+     "entrenar modelos"
+    ],
+    "esperados": [
+     "DT06",
+     "NUEVO04",
+     "PO01",
+     "PO03"
+    ],
+    "recomendados": [
+     "NUEVO04",
+     "DT06",
+     "PO01"
+    ],
+    "motivos": [
+     "porque buscaste: \"entrenar modelos\"",
+     "porque buscaste: \"entrenar modelos\"",
+     "porque buscaste: \"datos personales\""
+    ],
+    "precision@k": 1.0,
+    "al_menos_uno": 1.0
+   }
+  ],
+  "resumen": {
+   "precision@k": 0.4666666666666666,
+   "recall@k": 0.5166666666666667,
+   "al_menos_uno": 1.0,
+   "historial_precision@k": 1.0,
+   "historial_al_menos_uno": 1.0
+  }
+ },
+ "chatbot": [
+  {
+   "pregunta": "¿Qué pasó con los cobros duplicados a los suscriptores?",
+   "intencion": "contenido",
+   "respuesta": "Según **[RI08] Postmortem: cobro duplicado a suscriptores** (Reporte de incidente, similitud 0.34):\n\n> Un reintento automático en el servicio de pagos generó cobros duplicados a un grupo de suscriptores Premium. Se reembolsó a los usuarios afectados, se corrigió la lógica de reintentos con un identificador único por transacción y se agregaron pruebas que simulan fallas del proveedor.\n\n*Contexto del grafo:* este tipo de documento lo genera **Ingeniería de plataforma** y lo consultan ingeniería y liderazgo técnico. Conceptos relacionados: Servicio de pagos, Premium y suscripciones, Pruebas automatizadas.",
+   "fuentes": [
+    [
+     "RI08",
+     "Postmortem: cobro duplicado a suscriptores",
+     0.341
+    ]
+   ]
+  },
+  {
+   "pregunta": "¿Cómo despliego una nueva versión de un servicio en Kubernetes?",
+   "intencion": "contenido",
+   "respuesta": "Según **[DT01] Guía de despliegue del servicio de pagos** (Documentación técnica, similitud 0.27):\n\n> Esta guía explica cómo desplegar una nueva versión del servicio de pagos. Después se actualiza el manifiesto de Kubernetes y se monitorean las métricas de latencia durante treinta minutos.\n\n*Contexto del grafo:* este tipo de documento lo genera **Ingeniería de plataforma** y lo consultan ingenieros de otros squads y personal de guardia. Conceptos relacionados: Servicio de pagos, Kubernetes, Contenedores, Pruebas automatizadas, Reversión de cambios, Monitoreo y alertas.",
+   "fuentes": [
+    [
+     "DT01",
+     "Guía de despliegue del servicio de pagos",
+     0.274
+    ],
+    [
+     "NUEVO01",
+     "Guía de instalación del servicio de búsqueda",
+     0.13
+    ],
+    [
+     "DT07",
+     "Procedimiento de migración de base de datos",
+     0.108
+    ]
+   ]
+  },
+  {
+   "pregunta": "¿Qué hago si se activa una alerta en un servicio?",
+   "intencion": "contenido",
+   "respuesta": "Según **[NUEVO06] Manual de respuesta ante alertas del servicio de cuentas** (Documentación técnica, similitud 0.31):\n\n> Cuando se activa una alerta del servicio de cuentas, el ingeniero de guardia debe revisar el tablero de monitoreo, consultar los registros y verificar las dependencias con el servicio de autenticación. El manual indica los umbrales de error y a quién escalar la alerta.\n\n*Contexto del grafo:* este tipo de documento lo genera **Ingeniería de plataforma** y lo consultan ingenieros de otros squads y personal de guardia. Conceptos relacionados: Servicio de autenticación, Servicio de cuentas, Ingeniero de guardia, Monitoreo y alertas.",
+   "fuentes": [
+    [
+     "NUEVO06",
+     "Manual de respuesta ante alertas del servicio de cuentas",
+     0.306
+    ],
+    [
+     "DT05",
+     "Manual de monitoreo y alertas de la plataforma",
+     0.115
+    ],
+    [
+     "RI01",
+     "Postmortem: caída del servicio de pagos",
+     0.092
+    ]
+   ]
+  },
+  {
+   "pregunta": "¿Qué incidentes fueron causados por un certificado vencido?",
+   "intencion": "contenido",
+   "respuesta": "Según **[RI01] Postmortem: caída del servicio de pagos** (Reporte de incidente, similitud 0.24):\n\n> La causa raíz fue un certificado vencido en la conexión con el proveedor de pagos. Como acciones correctivas se automatizó la renovación de certificados y se agregó una alerta preventiva.\n\n*Contexto del grafo:* este tipo de documento lo genera **Ingeniería de plataforma** y lo consultan ingeniería y liderazgo técnico. Conceptos relacionados: Servicio de pagos, Premium y suscripciones, Usuarios de América Latina, Credencial o certificado vencido, Monitoreo y alertas.",
+   "fuentes": [
+    [
+     "RI01",
+     "Postmortem: caída del servicio de pagos",
+     0.236
+    ],
+    [
+     "RI05",
+     "Reporte de incidente: falla en notificaciones push",
+     0.055
+    ]
+   ]
+  },
+  {
+   "pregunta": "¿Puedo trabajar desde otro país?",
+   "intencion": "contenido",
+   "respuesta": "Según **[PO08] Política de trabajo remoto y uso de equipos** (Política interna, similitud 0.26):\n\n> Los colaboradores pueden trabajar de forma remota siempre que usen equipos administrados por la empresa y una conexión segura mediante la red privada virtual. La política define los horarios de colaboración, el cuidado de los equipos asignados y las reglas para trabajar desde otro país por periodos cortos.\n\n*Contexto del grafo:* este tipo de documento lo genera **Legal y seguridad** y lo consultan todos los colaboradores. Conceptos relacionados: Conducta y trabajo remoto.",
+   "fuentes": [
+    [
+     "PO08",
+     "Política de trabajo remoto y uso de equipos",
+     0.265
+    ]
+   ]
+  },
+  {
+   "pregunta": "muéstrame los postmortems",
+   "intencion": "lista_categoria",
+   "respuesta": "Estos son los documentos de **Reporte de incidente** (9):\n- [RI01] Postmortem: caída del servicio de pagos\n- [RI02] Postmortem: errores al iniciar sesión en la app móvil\n- [RI03] Reporte de incidente: latencia alta en la reproducción\n- [RI04] Postmortem: playlists que desaparecieron\n- [RI05] Reporte de incidente: falla en notificaciones push\n- [RI06] Postmortem: error en el conteo de reproducciones\n- [RI07] Reporte de incidente: caída del buscador\n- [RI08] Postmortem: cobro duplicado a suscriptores\n- [NUEVO02] Postmortem: interrupción de descargas sin conexión",
+   "fuentes": [
+    [
+     "RI01",
+     "Postmortem: caída del servicio de pagos",
+     0
+    ],
+    [
+     "RI02",
+     "Postmortem: errores al iniciar sesión en la app móvil",
+     0
+    ],
+    [
+     "RI03",
+     "Reporte de incidente: latencia alta en la reproducción",
+     0
+    ],
+    [
+     "RI04",
+     "Postmortem: playlists que desaparecieron",
+     0
+    ],
+    [
+     "RI05",
+     "Reporte de incidente: falla en notificaciones push",
+     0
+    ],
+    [
+     "RI06",
+     "Postmortem: error en el conteo de reproducciones",
+     0
+    ],
+    [
+     "RI07",
+     "Reporte de incidente: caída del buscador",
+     0
+    ],
+    [
+     "RI08",
+     "Postmortem: cobro duplicado a suscriptores",
+     0
+    ],
+    [
+     "NUEVO02",
+     "Postmortem: interrupción de descargas sin conexión",
+     0
+    ]
+   ]
+  },
+  {
+   "pregunta": "qué documentos hay sobre Servicio de pagos",
+   "intencion": "lista_concepto",
+   "respuesta": "Según el grafo de conocimiento, **4 documentos** mencionan *Servicio de pagos*:\n- [DT01] Guía de despliegue del servicio de pagos · Documentación técnica\n- [EX01] Resultado de prueba A/B: recordatorio de renovación · Resultado de experimento A/B\n- [RI01] Postmortem: caída del servicio de pagos · Reporte de incidente\n- [RI08] Postmortem: cobro duplicado a suscriptores · Reporte de incidente",
+   "fuentes": [
+    [
+     "DT01",
+     "Guía de despliegue del servicio de pagos",
+     0
+    ],
+    [
+     "EX01",
+     "Resultado de prueba A/B: recordatorio de renovación",
+     0
+    ],
+    [
+     "RI01",
+     "Postmortem: caída del servicio de pagos",
+     0
+    ],
+    [
+     "RI08",
+     "Postmortem: cobro duplicado a suscriptores",
+     0
+    ]
+   ]
+  },
+  {
+   "pregunta": "¿Cuál es la receta de la paella?",
+   "intencion": "sin_resultado",
+   "respuesta": "No encontré documentos que respondan esa pregunta. Prueba con otras palabras (por ejemplo, el nombre del servicio o de la funcionalidad).",
+   "fuentes": []
+  }
+ ],
+ "grafo": {
+  "nodos": 108,
+  "aristas": 254,
+  "por_tipo": {
+   "clase": 12,
+   "categoria": 5,
+   "area": 4,
+   "concepto": 41,
+   "documento": 46
+  },
+  "por_relacion": {
+   "forma parte de": 1,
+   "es responsable de": 1,
+   "desarrolla": 1,
+   "usa": 2,
+   "aplica": 1,
+   "es miembro de": 1,
+   "depende de": 2,
+   "se implementa en": 2,
+   "afecta": 1,
+   "tiene": 1,
+   "genera": 6,
+   "aplica a": 1,
+   "protege": 2,
+   "previene": 1,
+   "documenta": 1,
+   "se almacena en": 1,
+   "describe": 2,
+   "analiza": 1,
+   "propone": 1,
+   "evalúa": 1,
+   "regula": 1,
+   "establece": 1,
+   "es un": 41,
+   "se despliega en": 2,
+   "pertenece a": 46,
+   "menciona": 112,
+   "similar a": 21
+  }
+ },
+ "busqueda": {
+  "consultas": [
+   {
+    "consulta": "¿Qué pasó con los cobros duplicados a los suscriptores?",
+    "relevantes": [
+     "RI08"
+    ],
+    "devueltos": [
+     "RI08"
+    ],
+    "precision@k": 0.3333333333333333,
+    "precision_devueltos": 1.0,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "¿Cómo despliego una nueva versión de un servicio en Kubernetes?",
+    "relevantes": [
+     "DT01",
+     "NUEVO01"
+    ],
+    "devueltos": [
+     "DT01",
+     "NUEVO01",
+     "DT07"
+    ],
+    "precision@k": 0.6666666666666666,
+    "precision_devueltos": 0.6666666666666666,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "¿Por qué los usuarios cancelan su suscripción Premium?",
+    "relevantes": [
+     "IU01"
+    ],
+    "devueltos": [
+     "IU01",
+     "RI08",
+     "EX01"
+    ],
+    "precision@k": 0.3333333333333333,
+    "precision_devueltos": 0.3333333333333333,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "Reglas para usar datos personales al entrenar modelos de inteligencia artificial",
+    "relevantes": [
+     "NUEVO04",
+     "PO01",
+     "PO03"
+    ],
+    "devueltos": [
+     "PO03",
+     "NUEVO04",
+     "DT06"
+    ],
+    "precision@k": 0.6666666666666666,
+    "precision_devueltos": 0.6666666666666666,
+    "recall@k": 0.6666666666666666,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "¿Qué hago si se activa una alerta en un servicio?",
+    "relevantes": [
+     "DT05",
+     "NUEVO06"
+    ],
+    "devueltos": [
+     "NUEVO06",
+     "DT05",
+     "RI01"
+    ],
+    "precision@k": 0.6666666666666666,
+    "precision_devueltos": 0.6666666666666666,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "¿Qué incidentes fueron causados por un certificado o una credencial vencida?",
+    "relevantes": [
+     "RI01",
+     "RI05"
+    ],
+    "devueltos": [
+     "RI05",
+     "RI01"
+    ],
+    "precision@k": 0.6666666666666666,
+    "precision_devueltos": 1.0,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "Resultados sobre el consumo de podcasts",
+    "relevantes": [
+     "EX04",
+     "IU02"
+    ],
+    "devueltos": [
+     "EX04",
+     "IU02",
+     "EX05"
+    ],
+    "precision@k": 0.6666666666666666,
+    "precision_devueltos": 0.6666666666666666,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "¿Quién aprueba los permisos para entrar a los sistemas internos?",
+    "relevantes": [
+     "PO07"
+    ],
+    "devueltos": [
+     "PO07"
+    ],
+    "precision@k": 0.3333333333333333,
+    "precision_devueltos": 1.0,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "Problemas de accesibilidad con lector de pantalla",
+    "relevantes": [
+     "IU05"
+    ],
+    "devueltos": [
+     "IU05",
+     "EX08",
+     "EX02"
+    ],
+    "precision@k": 0.3333333333333333,
+    "precision_devueltos": 0.3333333333333333,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "¿Por qué falló el inicio de sesión en la app móvil?",
+    "relevantes": [
+     "RI02"
+    ],
+    "devueltos": [
+     "RI02",
+     "EX02"
+    ],
+    "precision@k": 0.3333333333333333,
+    "precision_devueltos": 0.5,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "¿Cuánto tiempo se guardan los registros de actividad de los usuarios?",
+    "relevantes": [
+     "PO04"
+    ],
+    "devueltos": [
+     "PO04",
+     "DT07",
+     "NUEVO06"
+    ],
+    "precision@k": 0.3333333333333333,
+    "precision_devueltos": 0.3333333333333333,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "¿Conviene bajar el precio del plan familiar?",
+    "relevantes": [
+     "EX06"
+    ],
+    "devueltos": [
+     "EX06",
+     "IU01"
+    ],
+    "precision@k": 0.3333333333333333,
+    "precision_devueltos": 0.5,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "¿Cómo escuchan música los usuarios en México y Brasil?",
+    "relevantes": [
+     "IU06"
+    ],
+    "devueltos": [
+     "IU06",
+     "EX04",
+     "NUEVO05"
+    ],
+    "precision@k": 0.3333333333333333,
+    "precision_devueltos": 0.3333333333333333,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "Pasos para migrar la base de datos del servicio de cuentas",
+    "relevantes": [
+     "DT07"
+    ],
+    "devueltos": [
+     "DT07",
+     "DT02",
+     "NUEVO06"
+    ],
+    "precision@k": 0.3333333333333333,
+    "precision_devueltos": 0.3333333333333333,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   },
+   {
+    "consulta": "¿Qué se aprendió cuando la búsqueda devolvió resultados vacíos?",
+    "relevantes": [
+     "RI07"
+    ],
+    "devueltos": [
+     "RI07",
+     "EX05",
+     "NUEVO01"
+    ],
+    "precision@k": 0.3333333333333333,
+    "precision_devueltos": 0.3333333333333333,
+    "recall@k": 1.0,
+    "acierto@1": 1.0,
+    "rr": 1.0
+   }
+  ],
+  "resumen": {
+   "precision@k": 0.4444444444444443,
+   "precision_devueltos": 0.5777777777777777,
+   "recall@k": 0.9777777777777777,
+   "acierto@1": 1.0,
+   "rr": 1.0
+  },
+  "resumen_solo_palabras": {
+   "precision@k": 0.4444444444444443,
+   "precision_devueltos": 0.5888888888888889,
+   "recall@k": 0.9777777777777777,
+   "acierto@1": 1.0,
+   "rr": 1.0
+  },
+  "precision_maxima@3": 0.4666666666666665
+ }
+}

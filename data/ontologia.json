@@ -1,0 +1,521 @@
+{
+  "_descripcion": "Ontología del dominio 'Desarrollo de software en Spotify'. Retoma las clases y relaciones de la fase I (Actividad 2, Protégé) y las amplía con instancias concretas, la clase Causa raíz y palabras clave para enlazar cada documento con los conceptos que menciona.",
+  "areas": {
+    "Ingeniería de plataforma": {
+      "genera": [
+        "Documentación técnica",
+        "Reporte de incidente"
+      ]
+    },
+    "Producto y datos": {
+      "genera": [
+        "Resultado de experimento A/B"
+      ]
+    },
+    "Legal y seguridad": {
+      "genera": [
+        "Política interna"
+      ]
+    },
+    "Investigación UX": {
+      "genera": [
+        "Investigación de usuarios"
+      ]
+    }
+  },
+  "categorias": {
+    "Documentación técnica": {
+      "contenido": "guías de despliegue, APIs, arquitectura y manuales de monitoreo",
+      "usuarios": "ingenieros de otros squads y personal de guardia",
+      "relaciones": [
+        [
+          "documenta",
+          "Servicio de software"
+        ],
+        [
+          "se almacena en",
+          "Herramienta"
+        ],
+        [
+          "describe",
+          "Práctica de ingeniería"
+        ]
+      ]
+    },
+    "Reporte de incidente": {
+      "contenido": "qué falló, causa raíz, impacto y acciones correctivas",
+      "usuarios": "ingeniería y liderazgo técnico",
+      "relaciones": [
+        [
+          "analiza",
+          "Incidente"
+        ],
+        [
+          "propone",
+          "Práctica de ingeniería"
+        ]
+      ]
+    },
+    "Resultado de experimento A/B": {
+      "contenido": "hipótesis, muestra, métricas y decisión",
+      "usuarios": "product managers, diseño y dirección",
+      "relaciones": [
+        [
+          "evalúa",
+          "Funcionalidad"
+        ]
+      ]
+    },
+    "Política interna": {
+      "contenido": "privacidad, seguridad, uso de IA, accesos y licencias",
+      "usuarios": "todos los colaboradores",
+      "relaciones": [
+        [
+          "regula",
+          "Colaborador"
+        ],
+        [
+          "protege",
+          "Datos de usuarios"
+        ],
+        [
+          "establece",
+          "Norma interna"
+        ]
+      ]
+    },
+    "Investigación de usuarios": {
+      "contenido": "entrevistas, encuestas y pruebas de usabilidad",
+      "usuarios": "producto, diseño y editorial",
+      "relaciones": [
+        [
+          "describe",
+          "Usuario"
+        ]
+      ]
+    }
+  },
+  "clases": {
+    "Squad": "Equipo pequeño y autónomo dueño de una parte del producto.",
+    "Tribu": "Grupo de squads de un área de negocio relacionada.",
+    "Colaborador": "Persona que trabaja en el área (ingeniero, product manager, etc.).",
+    "Servicio de software": "Microservicio de la plataforma.",
+    "Funcionalidad": "Característica que ve el usuario.",
+    "Incidente": "Falla que afecta a un servicio.",
+    "Causa raíz": "Origen técnico de un incidente (clase nueva en la fase final).",
+    "Usuario": "Persona que usa Spotify.",
+    "Datos de usuarios": "Información de escucha y de cuenta que la empresa debe proteger.",
+    "Herramienta": "Plataforma o tecnología interna que usan los squads.",
+    "Norma interna": "Regla o regulación que deben cumplir los colaboradores (clase nueva en la fase final).",
+    "Práctica de ingeniería": "Forma de trabajo que reduce fallas y se repite entre guías y postmortems (clase nueva en la fase final)."
+  },
+  "relaciones_clases": [
+    [
+      "Colaborador",
+      "es miembro de",
+      "Squad"
+    ],
+    [
+      "Squad",
+      "forma parte de",
+      "Tribu"
+    ],
+    [
+      "Squad",
+      "es responsable de",
+      "Servicio de software"
+    ],
+    [
+      "Squad",
+      "desarrolla",
+      "Funcionalidad"
+    ],
+    [
+      "Squad",
+      "usa",
+      "Herramienta"
+    ],
+    [
+      "Funcionalidad",
+      "se implementa en",
+      "Servicio de software"
+    ],
+    [
+      "Servicio de software",
+      "depende de",
+      "Servicio de software"
+    ],
+    [
+      "Incidente",
+      "afecta",
+      "Servicio de software"
+    ],
+    [
+      "Incidente",
+      "tiene",
+      "Causa raíz"
+    ],
+    [
+      "Usuario",
+      "usa",
+      "Funcionalidad"
+    ],
+    [
+      "Usuario",
+      "genera",
+      "Datos de usuarios"
+    ],
+    [
+      "Norma interna",
+      "aplica a",
+      "Colaborador"
+    ],
+    [
+      "Norma interna",
+      "protege",
+      "Datos de usuarios"
+    ],
+    [
+      "Squad",
+      "aplica",
+      "Práctica de ingeniería"
+    ],
+    [
+      "Práctica de ingeniería",
+      "previene",
+      "Incidente"
+    ]
+  ],
+  "instancias": {
+    "Servicio de pagos": {
+      "clase": "Servicio de software",
+      "palabras": [
+        "pagos",
+        "cobro",
+        "cobros"
+      ]
+    },
+    "Servicio de autenticación": {
+      "clase": "Servicio de software",
+      "palabras": [
+        "servicio de autenticacion",
+        "iniciar sesion",
+        "token",
+        "tokens"
+      ]
+    },
+    "Servicio de cuentas": {
+      "clase": "Servicio de software",
+      "palabras": [
+        "servicio de cuentas"
+      ]
+    },
+    "Servicio de búsqueda": {
+      "clase": "Servicio de software",
+      "palabras": [
+        "busqueda",
+        "buscador"
+      ]
+    },
+    "Sistema de recomendaciones": {
+      "clase": "Servicio de software",
+      "palabras": [
+        "recomendaciones",
+        "recomendacion"
+      ]
+    },
+    "Servicio de notificaciones": {
+      "clase": "Servicio de software",
+      "palabras": [
+        "notificacion",
+        "notificaciones"
+      ]
+    },
+    "Plataforma de streaming": {
+      "clase": "Servicio de software",
+      "palabras": [
+        "streaming",
+        "entrega de contenido",
+        "reproducir canciones"
+      ]
+    },
+    "Canalización de datos": {
+      "clase": "Servicio de software",
+      "palabras": [
+        "canalizacion de datos",
+        "en lotes",
+        "por lotes",
+        "esquema"
+      ]
+    },
+    "Premium y suscripciones": {
+      "clase": "Funcionalidad",
+      "palabras": [
+        "premium",
+        "suscripcion",
+        "suscriptores",
+        "renovacion"
+      ]
+    },
+    "Playlists": {
+      "clase": "Funcionalidad",
+      "palabras": [
+        "playlist",
+        "playlists",
+        "listas de reproduccion"
+      ]
+    },
+    "Podcasts": {
+      "clase": "Funcionalidad",
+      "palabras": [
+        "podcast",
+        "podcasts"
+      ]
+    },
+    "Audiolibros": {
+      "clase": "Funcionalidad",
+      "palabras": [
+        "audiolibro",
+        "audiolibros"
+      ]
+    },
+    "Letras en pantalla": {
+      "clase": "Funcionalidad",
+      "palabras": [
+        "letras"
+      ]
+    },
+    "Pantalla de inicio": {
+      "clase": "Funcionalidad",
+      "palabras": [
+        "pantalla de inicio"
+      ]
+    },
+    "Biblioteca": {
+      "clase": "Funcionalidad",
+      "palabras": [
+        "biblioteca"
+      ]
+    },
+    "Plan familiar": {
+      "clase": "Funcionalidad",
+      "palabras": [
+        "plan familiar"
+      ]
+    },
+    "Descargas sin conexión": {
+      "clase": "Funcionalidad",
+      "palabras": [
+        "descarga",
+        "descargar",
+        "descargados",
+        "descargan",
+        "sin conexion"
+      ]
+    },
+    "Mezcla aleatoria": {
+      "clase": "Funcionalidad",
+      "palabras": [
+        "aleatoria"
+      ]
+    },
+    "Kubernetes": {
+      "clase": "Herramienta",
+      "palabras": [
+        "kubernetes"
+      ]
+    },
+    "Backstage": {
+      "clase": "Herramienta",
+      "palabras": [
+        "backstage"
+      ]
+    },
+    "Contenedores": {
+      "clase": "Herramienta",
+      "palabras": [
+        "contenedor",
+        "contenedores"
+      ]
+    },
+    "Base de datos": {
+      "clase": "Herramienta",
+      "palabras": [
+        "base de datos",
+        "bases de datos"
+      ]
+    },
+    "Ingeniero de guardia": {
+      "clase": "Colaborador",
+      "palabras": [
+        "guardia"
+      ]
+    },
+    "Artistas": {
+      "clase": "Usuario",
+      "palabras": [
+        "artista",
+        "artistas"
+      ]
+    },
+    "Usuarios de América Latina": {
+      "clase": "Usuario",
+      "palabras": [
+        "america latina"
+      ]
+    },
+    "Usuarios con discapacidad visual": {
+      "clase": "Usuario",
+      "palabras": [
+        "discapacidad visual",
+        "lector de pantalla"
+      ]
+    },
+    "Datos personales": {
+      "clase": "Datos de usuarios",
+      "palabras": [
+        "datos personales",
+        "datos de los usuarios",
+        "datos sensibles",
+        "anonimizad"
+      ]
+    },
+    "Credencial o certificado vencido": {
+      "clase": "Causa raíz",
+      "palabras": [
+        "certificado vencido",
+        "vencimiento de una credencial"
+      ]
+    },
+    "Error introducido en un despliegue": {
+      "clase": "Causa raíz",
+      "palabras": [
+        "despliegue del servicio de autenticacion introdujo",
+        "despues de un despliegue",
+        "despues de una actualizacion del indice"
+      ]
+    },
+    "Configuración incorrecta": {
+      "clase": "Causa raíz",
+      "palabras": [
+        "configuracion incorrecta",
+        "error en la configuracion"
+      ]
+    },
+    "Registros de actividad": {
+      "clase": "Datos de usuarios",
+      "palabras": [
+        "registros de actividad",
+        "historial de reproduccion",
+        "solicitudes de borrado"
+      ]
+    },
+    "Protección de datos (reglamento europeo)": {
+      "clase": "Norma interna",
+      "palabras": [
+        "reglamento europeo",
+        "proteccion de datos",
+        "anonimizad"
+      ]
+    },
+    "Seguridad de la información": {
+      "clase": "Norma interna",
+      "palabras": [
+        "seguridad de la informacion",
+        "dos factores",
+        "contrasenas",
+        "cifrar",
+        "incidente de seguridad"
+      ]
+    },
+    "Control de acceso": {
+      "clase": "Norma interna",
+      "palabras": [
+        "minimo privilegio",
+        "acceso a los sistemas",
+        "permisos"
+      ]
+    },
+    "Licencias y derechos de autor": {
+      "clase": "Norma interna",
+      "palabras": [
+        "licencia",
+        "derechos de autor",
+        "regalias"
+      ]
+    },
+    "Conducta y trabajo remoto": {
+      "clase": "Norma interna",
+      "palabras": [
+        "codigo de conducta",
+        "trabajo remoto",
+        "trabajar de forma remota",
+        "red privada virtual"
+      ]
+    },
+    "Revisión de sesgos en IA": {
+      "clase": "Norma interna",
+      "palabras": [
+        "revision de sesgos",
+        "supervision humana",
+        "comite de privacidad"
+      ]
+    },
+    "Pruebas automatizadas": {
+      "clase": "Práctica de ingeniería",
+      "palabras": [
+        "pruebas automaticas",
+        "pruebas unitarias",
+        "pruebas de integracion",
+        "pruebas que simulan"
+      ]
+    },
+    "Revisión entre pares": {
+      "clase": "Práctica de ingeniería",
+      "palabras": [
+        "revision entre pares",
+        "revision obligatoria"
+      ]
+    },
+    "Reversión de cambios": {
+      "clase": "Práctica de ingeniería",
+      "palabras": [
+        "reversion",
+        "revertir",
+        "revirtio",
+        "restaurando la version anterior"
+      ]
+    },
+    "Monitoreo y alertas": {
+      "clase": "Práctica de ingeniería",
+      "palabras": [
+        "alerta",
+        "alertas",
+        "monitoreo",
+        "monitorean"
+      ]
+    }
+  },
+  "relaciones_instancias": [
+    [
+      "Premium y suscripciones",
+      "se implementa en",
+      "Servicio de pagos"
+    ],
+    [
+      "Servicio de autenticación",
+      "depende de",
+      "Servicio de cuentas"
+    ],
+    [
+      "Servicio de pagos",
+      "se despliega en",
+      "Kubernetes"
+    ],
+    [
+      "Servicio de búsqueda",
+      "se despliega en",
+      "Kubernetes"
+    ]
+  ]
+}
