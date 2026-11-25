@@ -21,6 +21,10 @@ El índice semántico que comparten la búsqueda, el recomendador y el chatbot e
 
 **Aplicación desplegada:** https://sgc-spotify.streamlit.app
 
+**Presentación ejecutiva (Canva):** https://www.canva.com/d/OQqudpft8OJuHmM · versión PDF en [`docs/Presentacion_ejecutiva.pdf`](docs/Presentacion_ejecutiva.pdf)
+
+**Documento técnico:** [`docs/Documento_tecnico.pdf`](docs/Documento_tecnico.pdf)
+
 ![Arquitectura](docs/arquitectura.png)
 
 ## Resultados principales
