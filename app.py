@@ -64,11 +64,9 @@ def etiqueta_categoria(cat):
 def tarjeta(d, clave, mostrar_motivo=False):
     """Muestra un documento recuperado con la información usada para encontrarlo."""
     with st.container(border=True):
-        c1, c2 = st.columns([5, 1])
         nuevo = " · 🆕 clasificado por el sistema" if d.get("nuevo") else ""
-        c1.markdown(f"**[{d['id']}] {d['titulo']}**  \n{etiqueta_categoria(d['categoria'])}{nuevo}", unsafe_allow_html=True)
-        if "similitud" in d:
-            c2.metric("Similitud", f"{d['similitud']:.3f}")
+        sim = f" · similitud <b>{d['similitud']:.3f}</b>" if "similitud" in d else ""
+        st.markdown(f"**[{d['id']}] {d['titulo']}**  \n{etiqueta_categoria(d['categoria'])}{sim}{nuevo}", unsafe_allow_html=True)
         info = []
         if mostrar_motivo and d.get("motivo"):
             info.append(f"🧭 {d['motivo']}")
