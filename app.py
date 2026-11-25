@@ -11,10 +11,12 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from sgc.datos import CATEGORIAS, COLORES, RAIZ, cargar_documentos
+from sgc.estilo import CSS, MARCA, hero
 from sgc.grafo import ESTILO
 from sgc.sistema import SistemaConocimiento
 
-st.set_page_config(page_title="SGC Spotify · Gestión del conocimiento con IA", page_icon="🎧", layout="wide")
+st.set_page_config(page_title="SGC Spotify · Gestión del conocimiento con IA", layout="wide")
+st.markdown(CSS, unsafe_allow_html=True)
 
 EJEMPLOS_CHAT = [
     "¿Qué pasó con los cobros duplicados a los suscriptores?",
@@ -58,18 +60,18 @@ def abrir_documento(doc_id):
 
 
 def etiqueta_categoria(cat):
-    return f"<span style='background:{COLORES.get(cat, '#999')};color:white;padding:2px 8px;border-radius:10px;font-size:0.8em'>{cat}</span>"
+    return f"<span class='chip' style='background:{COLORES.get(cat, '#999')}'>{cat}</span>"
 
 
 def tarjeta(d, clave, mostrar_motivo=False):
     """Muestra un documento recuperado con la información usada para encontrarlo."""
     with st.container(border=True):
-        nuevo = " · 🆕 clasificado por el sistema" if d.get("nuevo") else ""
-        sim = f" · similitud <b>{d['similitud']:.3f}</b>" if "similitud" in d else ""
+        nuevo = "<span class='chip-borde'>nuevo</span>" if d.get("nuevo") else ""
+        sim = f"<span class='sim'>similitud <b>{d['similitud']:.3f}</b></span>" if "similitud" in d else ""
         st.markdown(f"**[{d['id']}] {d['titulo']}**  \n{etiqueta_categoria(d['categoria'])}{sim}{nuevo}", unsafe_allow_html=True)
         info = []
         if mostrar_motivo and d.get("motivo"):
-            info.append(f"🧭 {d['motivo']}")
+            info.append(d["motivo"])
         if d.get("terminos"):
             info.append("Términos en común: " + ", ".join(f"`{t}`" for t in d["terminos"]))
         if d.get("conceptos"):
@@ -83,13 +85,10 @@ def tarjeta(d, clave, mostrar_motivo=False):
 
 s = sistema()
 
-st.title("Sistema de gestión del conocimiento · Desarrollo de software")
-st.caption("Pregunta, busca, clasifica y explora el conocimiento del área. Todos los componentes comparten el mismo repositorio, "
-           "así que un documento nuevo aparece al instante en el chatbot, la búsqueda, las recomendaciones y el grafo.")
+st.markdown(hero(len(s.documentos), s.grafo.G.number_of_nodes(), s.grafo.G.number_of_edges()), unsafe_allow_html=True)
 
 tab_chat, tab_busq, tab_clas, tab_grafo, tab_eval, tab_repo = st.tabs(
-    ["💬 Chatbot", "🔎 Búsqueda y recomendaciones", "🗂️ Clasificar documento", "🕸️ Grafo de conocimiento",
-     "📊 Evaluación", "📚 Repositorio"])
+    ["Chatbot", "Búsqueda y recomendaciones", "Clasificar documento", "Grafo de conocimiento", "Evaluación", "Repositorio"])
 
 # ---------------- chatbot ----------------
 with tab_chat:
@@ -112,7 +111,7 @@ with tab_chat:
     for i, turno in enumerate(reversed(st.session_state.chat)):
         with st.chat_message("user"):
             st.write(turno["pregunta"])
-        with st.chat_message("assistant", avatar="🎧"):
+        with st.chat_message("assistant"):
             st.markdown(turno["respuesta"])
             if turno["intencion"] == "contenido" and turno["fuentes"]:
                 with st.expander("Documentos recuperados y similitud"):
@@ -151,16 +150,16 @@ with tab_busq:
             ctx = s.grafo.contexto_ontologico(sel)
             st.caption(f"Área que lo genera: {ctx['area']} · Lo consultan: {ctx['usuarios']}  \n"
                        f"Conceptos: {', '.join(ctx['conceptos']) or '—'}")
-            if st.button("🕸️ Ver este documento en el grafo"):
+            if st.button("Ver este documento en el grafo"):
                 st.session_state.centro_grafo = f"documento:{sel}"
                 st.info("Abre la pestaña «Grafo de conocimiento»: ya está centrado en este documento.")
-            st.markdown("#### 📎 Documentos relacionados")
+            st.markdown("<div class='titulo-seccion'>Documentos relacionados</div>", unsafe_allow_html=True)
             st.caption("Recomendados por similitud semántica con el documento abierto.")
             for j, r in enumerate(s.recomendador.relacionados(sel, k=3)):
                 tarjeta(r, f"r_{j}_{r['id']}")
         else:
             st.caption("Abre un resultado para leerlo y ver los documentos relacionados.")
-        st.markdown("#### ⭐ Según tu historial")
+        st.markdown("<div class='titulo-seccion'>Según tu historial</div>", unsafe_allow_html=True)
         recs = s.recomendador.por_historial(st.session_state.historial, vistos=st.session_state.vistos, k=3)
         if recs:
             for j, r in enumerate(recs):
@@ -290,13 +289,13 @@ with tab_repo:
 def barra_lateral():
     """Se dibuja al final para que refleje la consulta que se acaba de hacer."""
     with st.sidebar:
-        st.markdown("## 🎧 SGC Spotify")
+        st.markdown(MARCA, unsafe_allow_html=True)
         st.caption("Prototipo de gestión del conocimiento con IA para el área de desarrollo de software. "
                    "Documentos simulados con fines académicos.")
         c1, c2 = st.columns(2)
         c1.metric("Documentos", len(s.documentos))
         c2.metric("Nodos en el grafo", s.grafo.G.number_of_nodes())
-        st.markdown("### 🕘 Tu contexto de búsqueda")
+        st.markdown("### Tu contexto de búsqueda")
         if st.session_state.historial:
             for q in st.session_state.historial[-5:][::-1]:
                 st.markdown(f"- {q}")
@@ -309,7 +308,7 @@ def barra_lateral():
                 st.session_state[k] = []
             st.session_state.doc_sel = None
             st.rerun()
-        st.markdown("### ⭐ Recomendado para ti")
+        st.markdown("### Recomendado para ti")
         recs = s.recomendador.por_historial(st.session_state.historial, vistos=st.session_state.vistos, k=3)
         if recs:
             for r in recs:

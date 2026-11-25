@@ -179,13 +179,14 @@ class GrafoConocimiento:
             nodos.append({"id": n, "label": a["etiqueta"], "title": titulo, "shape": e["shape"],
                           "size": e["tam"], "color": color, "tipo": e["nombre"],
                           "borderWidth": 4 if n == resaltar else (3 if a.get("nuevo") else 1),
-                          "font": {"size": 16 if a["tipo"] in ("area", "categoria", "clase") else 12}})
+                          "font": {"size": 16 if a["tipo"] in ("area", "categoria", "clase") else 12,
+                                   "color": "#000000" if e["shape"] in ("box", "ellipse") else "#E6E6E6"}})
         aristas = []
         for u, v, r in H.edges(data="relacion"):
             sim = r.startswith("similar a")
             aristas.append({"from": u, "to": v, "label": "" if sim or r in ("pertenece a", "menciona") else r,
                             "title": r, "arrows": "" if sim else "to", "dashes": sim,
-                            "color": {"color": "#E57373" if sim else "#9E9E9E"}})
+                            "color": {"color": "#1DB954" if sim else "#5A5A5A"}})
         leyenda = "".join(
             f'<span style="margin-right:14px"><span style="display:inline-block;width:12px;height:12px;'
             f'background:{e["color"]};border-radius:2px;margin-right:4px"></span>{e["nombre"]}</span>'
@@ -197,19 +198,23 @@ class GrafoConocimiento:
 
 PLANTILLA_HTML = """<!DOCTYPE html><html><head><meta charset="utf-8">
 <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
-<style>body{margin:0;font-family:sans-serif;font-size:13px;color:#222}
-#red{height:__ALTO__px;border:1px solid #ddd;border-radius:6px}
-#info{padding:8px 4px;min-height:40px}#ley{padding:6px 4px;color:#444}</style></head><body>
-<div id="ley">__LEYENDA__ · <span style="color:#E57373">- - -</span> documentos similares · borde grueso = documento clasificado por el sistema</div>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;font-family:Figtree,Arial,sans-serif;font-size:13px;color:#E6E6E6;background:transparent}
+#red{height:__ALTO__px;border:1px solid #2A2A2A;border-radius:14px;background:#181818}
+#info{padding:10px 6px;min-height:40px;color:#B3B3B3}#info b{color:#fff}
+#ley{padding:6px 4px 10px;color:#B3B3B3}
+div.vis-tooltip{background:#282828!important;color:#fff!important;border:none!important;border-radius:8px!important;
+ font-family:Figtree,Arial,sans-serif!important;padding:8px 10px!important;white-space:pre-line;box-shadow:0 8px 24px rgba(0,0,0,.5)}</style></head><body>
+<div id="ley">__LEYENDA__ · <span style="color:#1DB954">- - -</span> documentos similares · borde grueso = documento clasificado por el sistema</div>
 <div id="red"></div><div id="info">Haz clic en un nodo para ver sus conexiones. Usa la rueda del ratón para acercar.</div>
 <script>
 const nodos=new vis.DataSet(__NODOS__), aristas=new vis.DataSet(__ARISTAS__);
 const red=new vis.Network(document.getElementById('red'),{nodes:nodos,edges:aristas},{
  physics:{solver:'forceAtlas2Based',forceAtlas2Based:{gravitationalConstant:-60,springLength:90},stabilization:{iterations:250}},
- edges:{font:{size:10,align:'middle'},smooth:false},interaction:{hover:true,tooltipDelay:120}});
+ edges:{font:{size:10,align:'middle',color:'#B3B3B3',strokeColor:'#181818'},smooth:false},interaction:{hover:true,tooltipDelay:120}});
 red.on('click',p=>{if(!p.nodes.length)return;const id=p.nodes[0],n=nodos.get(id);
  const filas=aristas.get().filter(e=>e.from===id||e.to===id).map(e=>{
   const otro=nodos.get(e.from===id?e.to:e.from);const dir=e.from===id?'→':'←';
-  return '<li>'+dir+' <i>'+e.title+'</i> '+otro.label+' <span style="color:#888">('+otro.tipo+')</span></li>'});
+  return '<li>'+dir+' <i>'+e.title+'</i> '+otro.label+' <span style="color:#7a7a7a">('+otro.tipo+')</span></li>'});
  document.getElementById('info').innerHTML='<b>'+n.tipo+': '+n.label+'</b> · '+filas.length+' conexiones<ul style="margin:4px 0">'+filas.join('')+'</ul>';});
 </script></body></html>"""
