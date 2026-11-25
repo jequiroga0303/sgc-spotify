@@ -94,9 +94,11 @@ tab_chat, tab_busq, tab_clas, tab_grafo, tab_eval, tab_repo = st.tabs(
 with tab_chat:
     st.subheader("Pregúntale al repositorio")
     st.caption("El asistente busca en los documentos, cita de dónde saca cada respuesta y agrega el contexto del grafo. No inventa información.")
-    cols = st.columns(len(EJEMPLOS_CHAT))
+    st.markdown("<div class='titulo-seccion'>Prueba con</div>", unsafe_allow_html=True)
+    cols = st.columns(2)
     pregunta_ejemplo = None
-    for c, ej in zip(cols, EJEMPLOS_CHAT):
+    for i_ej, ej in enumerate(EJEMPLOS_CHAT):
+        c = cols[i_ej % 2]
         if c.button(ej, key=f"ej_{ej}", use_container_width=True):
             pregunta_ejemplo = ej
     with st.form("form_chat", clear_on_submit=True):

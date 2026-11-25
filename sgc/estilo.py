@@ -99,6 +99,16 @@ html, body, [class*="css"], .stMarkdown, .stText, button, input, textarea, selec
 .stTabs [data-baseweb="tab-highlight"], .stTabs [data-baseweb="tab-border"] { display: none; }
 .stTabs [data-baseweb="tab-panel"] { padding-top: 1.4rem; }
 
+.stTabs button[role="tab"] {
+  background: var(--tarjeta) !important; border-radius: 999px !important; padding: .5rem 1.15rem !important;
+  border: none !important; margin-right: .1rem; transition: background .2s, transform .2s;
+}
+.stTabs button[role="tab"]:hover { background: var(--tarjeta-hover) !important; transform: translateY(-1px); }
+.stTabs button[role="tab"][aria-selected="true"] { background: #FFFFFF !important; }
+.stTabs button[role="tab"][aria-selected="true"] p { color: #000 !important; }
+.stTabs button[role="tab"] p { font-weight: 600; font-size: .92rem; }
+.stButton > button p { white-space: normal; text-align: center; line-height: 1.25; }
+
 /* títulos */
 h2, h3, h4 { color: var(--texto) !important; font-weight: 700 !important; letter-spacing: -.01em; }
 [data-testid="stCaptionContainer"], .stCaption { color: var(--texto-suave) !important; }
