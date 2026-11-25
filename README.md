@@ -4,7 +4,7 @@ Proyecto final de **Sistemas y tecnologías de administración del conocimiento*
 
 | Equipo | Profesor | Entrega |
 |---|---|---|
-| Adriana Matilda Cruz Rito (3096121) | Jonathan Alexis Puente Guerrero | Noviembre 2026 |
+| Jorge Emilio Quiroga López (3112182) · Adriana Matilda Cruz Rito (3096121) | Jonathan Alexis Puente Guerrero | Noviembre 2026 |
 
 Prototipo de un sistema de gestión del conocimiento (SGC) para el área de desarrollo de software de Spotify. Integra en una sola aplicación web cuatro componentes que trabajan sobre el mismo repositorio de documentos:
 
