@@ -29,7 +29,7 @@ El índice semántico que comparten la búsqueda, el recomendador y el chatbot e
 | Recomendaciones por historial | 3 historiales de búsqueda | Precisión@3 **100 %** |
 | Grafo | ontología + 46 documentos | **108 nodos** y **254 relaciones** |
 
-El detalle de cada prueba está en la carpeta [`evidencias/`](evidencias).
+El detalle de cada prueba está en la carpeta [`evidencias/`](evidencias). Las capturas de la app desplegada (3 preguntas al chatbot y 3 recomendaciones) están en [`evidencias/capturas/`](evidencias/capturas).
 
 ## Estructura del repositorio
 
