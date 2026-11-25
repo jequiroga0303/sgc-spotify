@@ -62,6 +62,7 @@ sgc-spotify/
 ├── evidencias/                 Resultados de las pruebas (markdown, imágenes, grafo HTML, metricas.json)
 └── docs/
     ├── Documento_tecnico.pdf   Explicación técnica (arquitectura, componentes, despliegue, evaluación)
+    ├── Presentacion_ejecutiva.pdf  Presentación ejecutiva (12 diapositivas)
     └── arquitectura.png
 ```
 
